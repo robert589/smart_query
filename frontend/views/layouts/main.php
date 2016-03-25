@@ -65,34 +65,7 @@ $this->beginBody() ?>
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <div class="col-md-2 col-md-offset-1 col-xs-0" id = "left-sidebar">
-            <?=
-            SideNav::widget([
-                'type' => SideNav::TYPE_DEFAULT,
-                'heading' => 'Category',
-                'items' => [
-                    [
-                        'label' => 'All',
-                    ],
-                    [
-                        'label' => 'Politics',
 
-                    ],
-                    [
-                        'label' => 'Social',
-
-                    ],
-                    [
-                        'label' => 'Technology',
-                    ],
-                    [
-                        'label' => 'Economy',
-
-                    ]
-                ],
-            ]);
-            ?>
-        </div>
         <div class="col-md-9 col-xs-10">
             <?= $content ?>
         </div>

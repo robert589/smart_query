@@ -13,8 +13,12 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\httpclient\Client;
+use yii\helpers\Json;
+use yii\web\JsonResponseFormatter;
 use common\models\QueryForm;
-
+use yii\web\JsonParser;
+use common\components\CustomDataProvider;
 /**
  * Site controller
  */
@@ -72,6 +76,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+    /*
     public function actionIndex()
     {
 
@@ -144,6 +149,88 @@ class SiteController extends Controller
                 'spell_check' => $spell_check]);
 
         }
+    }*/
+
+    public function actionIndex(){
+
+
+        if(Yii::$app->request->isPost){
+            var_dump($_POST);
+            if(isset($_POST['category'])){
+                $category = $_POST['category'];
+            }
+            else{
+                $category = '';
+            }
+
+
+            if(isset($_POST['category'])){
+                $category = $_POST['category'];
+            }
+            else{
+                $category = '';
+            }
+
+
+            if(isset($_POST['source'])){
+                $source = $_POST['source'];
+            }
+            else{
+                $source = '';
+            }
+
+
+            if(isset($_POST['query'])){
+                $query = $_POST['query'];
+            }
+            else{
+                $query = '';
+            }
+
+
+            if(isset($_POST['sort_by'])){
+                $sort_by = $_POST['sort_by'];
+            }
+            else{
+                $sort_by = '';
+            }
+
+
+            $data_provider = new CustomDataProvider([
+                'key' => function ($model) {
+                    return $model['post_id'];
+                },
+                'x_category' => $category,
+                'x_source' => $source,
+                'x_sort_by' => $sort_by,
+                'x_query' => $query,
+                'pagination' => ['pageSize' => 10]]
+            );
+
+            return $this->render('index', ['data_provider' => $data_provider,
+                'source' => $source  ,
+                'category' => $category,
+                'query' => $query,
+                'sort_by' => $sort_by]);
+        }
+        else {
+
+            $data_provider = new CustomDataProvider([
+                'key' => function ($model) {
+                    return $model['post_id'];
+                },
+                'pagination' => ['pageSize' => 10]]);
+
+            return $this->render('index', ['data_provider' => $data_provider,
+                                            'source' => '',
+                                            'category' => '',
+                                            'query' => '',
+                                            'sort_by' => '']);
+
+        }
+
+
+
     }
 
     public function actionProcess(){
@@ -300,5 +387,24 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    function jsonp_decode($jsonp, $assoc = false) { // PHP 5.3 adds depth as third parameter to json_decode
+        if($jsonp[0] !== '[' && $jsonp[0] !== '{') { // we have JSONP
+            $jsonp = substr($jsonp, strpos($jsonp, '('));
+        }
+        return json_decode(trim($jsonp,'();'), $assoc);
+    }
+
+    function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+    function xml2array ( $xmlObject, $out = array () )
+    {
+        foreach ( (array) $xmlObject as $index => $node )
+            $out[$index] = ( is_object ( $node ) ) ? xml2array ( $node ) : $node;
+
+        return $out;
     }
 }
