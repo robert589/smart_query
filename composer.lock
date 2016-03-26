@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "03c187e060b6cccd3f1eed350312bbc1",
-    "content-hash": "554aaf1c2c9557ac42be989f016861dc",
+    "hash": "1af446322f8db60fd2fc48bd10d79c33",
+    "content-hash": "caaf54409dca5a06bcf1c093997a2c51",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -481,6 +481,52 @@
                 "select"
             ],
             "time": "2015-12-16 18:15:01"
+        },
+        {
+            "name": "kartik-v/yii2-helpers",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-helpers.git",
+                "reference": "e2ba2a2435b65e5ff808a2ccf46d9963f46a254f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-helpers/zipball/e2ba2a2435b65e5ff808a2ccf46d9963f46a254f",
+                "reference": "e2ba2a2435b65e5ff808a2ccf46d9963f46a254f",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\helpers\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A collection of useful helper functions for Yii Framework 2.0",
+            "homepage": "https://github.com/kartik-v/yii2-helpers",
+            "keywords": [
+                "bootstrap",
+                "extension",
+                "helper",
+                "utilities",
+                "yii",
+                "yii2"
+            ],
+            "time": "2016-03-11 01:33:21"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -1705,7 +1751,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/1a6d5e89ba4b30e7c658fbd3c268ef0ce750ae95",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/438f2d2228b450fad76e022264b1d8e30ea12633",
                 "reference": "1a6d5e89ba4b30e7c658fbd3c268ef0ce750ae95",
                 "shasum": ""
             },
@@ -2293,7 +2339,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "kartik-v/yii2-widget-select2": 20,
-        "kop/yii2-scroll-pager": 20
+        "kop/yii2-scroll-pager": 20,
+        "kartik-v/yii2-helpers": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

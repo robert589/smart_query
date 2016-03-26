@@ -36,7 +36,7 @@
             <img style="width:100%" src="<?= $source_logo ?>">
         </div>
         <div class="col-md-6">
-            <?= Html::a($model['source'], $model['attachment_media_href']) ?>
+            <?= Html::a($model['source'], $model['attachment_media_href']) ?> | <?= $model['category'] ?>
             <br>
 
             <?= '<b>Created at:</b> ' . date("j F Y, H:i:s", $model['created_time']) ?>
@@ -55,7 +55,9 @@
 
     <div class="col-md-12" style="margin-right:0%;padding: 0%;margin-bottom: 30px">
         <img src="<?= $model['attachment_media_fullsize_src']?>" class="news_image"  id="image">
-        <div class="below_image" align="center"> <?= $attc_name ?></div>
+        <div class="below_image" align="center">
+            <?= $attc_name ?>
+        </div>
 
     </div>
 

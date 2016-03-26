@@ -1,8 +1,6 @@
 $(document).ready(function(){
 
     //on profile/index
-
-
     $("div.below_image").mouseenter(function() {
         $("img.news_image").css("opacity",".5");
         $("div.below_image").css("opacity","1");
@@ -27,50 +25,32 @@ $(document).ready(function(){
         query();
     });
 
-
-
     $("#query_button").click(function(){
-        performQuery();
-    });
+        $("#query").val($("#search_box").val());
 
-    $('input[type=radio][name="QueryForm[category]"]').change(function() {
-        performQuery();
-    });
-    $("#sort_by").change(function () {
+        query();
     });
 
     $("#search_box").keydown(function(event){
-
         if(event.keyCode == 13){
+            $("#query").val($("#search_box").val());
+            query();
             return false;
         }
     });
 
-    $("a:contains('All')").click(function(){
-        $("#category").val('');
+    $("input:radio[name=category_sidenav]").change(function(){
+        var category =  $(this).closest('label.active input:radio').val();
+
+        $("#category").val(category);
         query();
     });
 
 
-    $("a:contains('Politics')").click(function(){
-        $("#category").val('Politics');
-        query();
-    });
+    $("input:radio[name=sort_by_sidenav]").change(function(){
+        var sort_by =  $(this).closest('label.active input:radio').val();
 
-
-    $("a:contains('Social')").click(function(){
-        $("#category").val('Social');
-        query();
-    });
-
-
-    $("a:contains('Technology')").click(function(){
-        $("#category").val('Technology');
-        query();
-    });
-
-    $("a:contains('Economy')").click(function(){
-        $("#category").val('Economy');
+        $("#sort_by").val(sort_by);
         query();
     });
 
