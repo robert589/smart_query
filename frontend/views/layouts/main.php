@@ -40,21 +40,19 @@ $this->beginBody() ?>
         ],
     ]) ?>
 
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse col-md-offset-3">
+      <form class="navbar-form navbar-left mynav" role="search">
+        <div class="form-group">
+          <?=  Html::textInput(
+                'search_box_menu',
+                $this->params['query'],
+                ['placeholder' => 'Search', 'class' => 'form-control','id' => 'search_box']
 
-        <ul class="nav navbar-nav mynav">
-            <li class="item">
-
-                <?=  Html::textInput(
-                       'search_box_menu',
-                        $this->params['query'],
-                        ['placeholder' => 'Search', 'class' => 'form-control','id' => 'search_box']
-
-                    )
-                 ?>
-           </li>
-        </ul>
+            )
+            ?>
+        </div>
         <?= Html::button('Search' , ['class' => 'btn btn-primary', 'style' => 'margin-top:5px', 'id' => 'query_button']) ?>
+      </form>
     </div>
 <?php
     NavBar::end();
@@ -66,7 +64,7 @@ $this->beginBody() ?>
         ]) ?>
         <?= Alert::widget() ?>
 
-        <div class="col-md-9 col-xs-10">
+        <div class="col-md-12 col-xs-12">
             <?= $content ?>
         </div>
     </div>

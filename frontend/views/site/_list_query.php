@@ -30,33 +30,31 @@
     $link_to_fb = 'https://facebook.com/' . $exploded[0]  . '/posts/' . $exploded[1];
 ?>
 
-<div class="col-md-12" style="margin-bottom: 50px;background-color: white; border-bottom: 1px solid">
-    <div class="col-md-12" style="margin-bottom: 15px">
-        <div class="col-md-2 col-xs-2">
+<div class="col-md-12" style="margin-bottom: 50px; border-bottom: 1px solid #E5E5E5">
+    <div class="col-md-12 marginer" style="margin-bottom: 15px">
+        <div class="col-md-2 marginer">
             <img style="width:100%" src="<?= $source_logo ?>">
         </div>
         <div class="col-md-6">
             <?= Html::a($model['source'], $model['attachment_media_href']) ?>
             <br>
-
-            <?= '<b>Created at:</b> ' . date("j F Y, H:i:s", $model['created_time']) ?>
+            <?= '<span class="glyphicon glyphicon-time"></span> ' . date("j F Y, H:i:s", $model['created_time']) ?>
 
         </div>
-        <div class="col-md-4" style="font-size: 20px">
+        <div class="col-md-4 marginer" style="font-size: 2em">
             <span class="glyphicon glyphicon-thumbs-up"> <?='  '.  $model['like_count'] ?> </span>
         </div>
 
     </div>
 
-    <div class="col-md-12" style="margin-bottom: 15px">
+    <div class="col-md-12 marginer" style="margin-bottom: 15px">
         <div style="font-size: 25px; font-weight:bold"><?= Html::a($model['message'], $link_to_fb, ['target' => '_blank']) ?></div>
 
     </div>
 
-    <div class="col-md-12" style="margin-right:0%;padding: 0%;margin-bottom: 30px">
+    <div class="col-md-12 marginer" style="margin-right:0; margin-bottom: 30px">
         <img src="<?= $model['attachment_media_fullsize_src']?>" class="news_image"  id="image">
         <div class="below_image" align="center"> <?= $attc_name ?></div>
-
     </div>
 
 

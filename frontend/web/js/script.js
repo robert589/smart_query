@@ -2,23 +2,22 @@ $(document).ready(function(){
 
     //on profile/index
 
-
-    $("div.below_image").mouseenter(function() {
-        $("img.news_image").css("opacity",".5");
-        $("div.below_image").css("opacity","1");
-    });
-    $("div.below_image").mouseout(function() {
-        $("img.news_image").css("opacity","1");
-        $("div.below_image").css("opacity","0");
-    });
-    $("img.news_image").mouseenter(function() {
-        $("img.news_image").css("opacity",".5");
-        $("div.below_image").css("opacity","1");
-    });
-    $("img.news_image").mouseout(function() {
-        $("img.news_image").css("opacity","1");
-        $("div.below_image").css("opacity","0");
-    });
+    // $("div.below_image").mouseenter(function() {
+    //     $("img.news_image").css("opacity",".5");
+    //     $("div.below_image").css("opacity","1");
+    // });
+    // $("div.below_image").mouseout(function() {
+    //     $("img.news_image").css("opacity","1");
+    //     $("div.below_image").css("opacity","0");
+    // });
+    // $("img.news_image").mouseenter(function() {
+    //     $("img.news_image").css("opacity",".5");
+    //     $("div.below_image").css("opacity","1");
+    // });
+    // $("img.news_image").mouseout(function() {
+    //     $("img.news_image").css("opacity","1");
+    //     $("div.below_image").css("opacity","0");
+    // });
 
     $(document).on('mouseup', '#source_tabsx', function(){
         setTimeout(function() {

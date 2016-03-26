@@ -53,7 +53,7 @@ $items = [
     ]
 ?>
 
-    <div id = "left-sidebar">
+    <div id="left-sidebar" class="col-md-3">
         <?=
         SideNav::widget([
             'type' => SideNav::TYPE_DEFAULT,
@@ -62,8 +62,8 @@ $items = [
         ]);
         ?>
     </div>
-    <div class="col-md-12 col-xs-12  content">
-        <div class='col-md-12' style="margin-left:0px; padding-left: 0px; ">
+    <div class="col-md-9 col-xs-9 col-md-offset-3">
+        <div class='col-md-12 marginer'>
             <?= TabsX::widget([
                 'id' => 'source_tabsx',
                 'items'=>$items,
