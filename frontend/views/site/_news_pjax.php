@@ -13,7 +13,21 @@ use yii\widgets\ListView;
 /** @var $query string */
 
 ?>
-<?php $form = ActiveForm::begin(['id' => 'form_up']) ?>
+
+<?php Pjax::begin(
+    [
+        'id' => 'newspjax',
+        'timeout' => false,
+        'enablePushState' => false,
+        'options'=>[
+            'container' => '#news_pjax'
+
+        ]
+    ]
+)
+?>
+
+<?php $form = ActiveForm::begin(['id' => 'form_up', 'options' => ['data-pjax' => '#news_pjax']]) ?>
 
     <?= Html::hiddenInput('category', $category, ['id' =>  'category'] ) ?>
 
@@ -36,11 +50,10 @@ use yii\widgets\ListView;
             'class' => ScrollPager::class,
             'enabledExtensions' => [
                 ScrollPager::EXTENSION_TRIGGER,
-                ScrollPager::EXTENSION_SPINNER,
                 ScrollPager::EXTENSION_NONE_LEFT,
                 ScrollPager::EXTENSION_PAGING,
             ],
-            'triggerOffset' => 100
+            'triggerOffset' => 200
         ],
         'itemView' => function ($model, $key, $index, $widget) {
             return $this->render('_list_query',['model' => $model]);
@@ -50,3 +63,7 @@ use yii\widgets\ListView;
 </div>
 
 <?php ActiveForm::end() ?>
+
+
+<?php Pjax::end()
+?>

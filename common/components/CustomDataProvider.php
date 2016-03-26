@@ -17,28 +17,7 @@ class CustomDataProvider extends BaseDataProvider
      */
     public $key;
 
-    /**
-     * @var string query of the search engine
-     */
-    public static $query;
-    public $x_query;
-    /**
-     * @var string name of the media source like BBC, etc
-     */
-    public static $source;
-    public $x_source;
-    /**
-     * @var string sort_by Popularity or latest
-     */
-    public static $sort_by;
-    public $x_sort_by;
-    /**
-     * @var category
-     */
-
-    public static $category;
-    public $x_category;
-
+    public $url;
 
     /**
      * @var$totalCount
@@ -52,12 +31,7 @@ class CustomDataProvider extends BaseDataProvider
     public function init()
     {
         parent::init();
-
-        self::$query = $this->x_query;
-        self::$category = $this->x_category;
-        self::$sort_by = $this->x_sort_by;
-        self::$source = $this->x_source;
-        $url = $this->getUrl($this->getPagination());
+        $url = $this->url;
         $client = new Client();
 
         $results = $client->createRequest()
@@ -65,14 +39,17 @@ class CustomDataProvider extends BaseDataProvider
             ->setUrl($url)
             ->send();
 
-        if (isset($results->getData()['response'])) {
-            $this->totalCount = (int)$results->getData()['response']['numFound'];
 
-        } else {
-            $this->totalCount = 0;
+        if($results->isOk){
 
-
+            $results = $results->getData();
+            $results = $results['response']['numFound'];
+            $this->totalCount =  $results;
         }
+        else{
+            $this->totalCount = 0;
+        }
+
     }
 
     /**
@@ -83,10 +60,16 @@ class CustomDataProvider extends BaseDataProvider
 
         if (($pagination = $this->getPagination()) !== false) {
 
-            $url = $this->getUrl($pagination);
 
+            $url = $this->url;
 
             $client = new Client();
+
+            if (($pagination = $this->getPagination()) !== false) {
+                $pagination->totalCount = $this->totalCount;
+                $url .= '&start=' .$pagination->getOffset() . '&rows=' . $pagination->getLimit();
+            }
+
 
             $results = $client->createRequest()
                 ->setMethod('post')
@@ -95,16 +78,6 @@ class CustomDataProvider extends BaseDataProvider
 
 
             if($results->isOk){
-
-
-                /*
-                if(isset($results->getData()['response'])){
-                    $this->getPagination()->totalCount =  (int) $results->getData()['response']['numFound'] ;
-
-                }
-                else{
-                    $this->getPagination()->totalCount = 0;
-                }*/
 
                 $results = $results->getData();
                 $results = $results['response']['docs'];
@@ -142,58 +115,8 @@ class CustomDataProvider extends BaseDataProvider
      */
     protected function prepareTotalCount()
     {
-
         return $this->totalCount;
     }
 
-    private function getUrl($pagination = null){
-
-        if($this->totalCount == 0 || $this->totalCount == null){
-            $pagination->totalCount = 100;
-        }
-        else{
-            $pagination->totalCount = $this->totalCount;
-        }
-
-        $limit = $pagination->getPageSize();
-        $offset = $pagination->getOffset();
-
-        $url = "http://solr.kenrick95.xyz/solr/cz4034/select?&wt=json&indent=true&start=" . $offset . '&rows=' . $limit;
-
-        //query
-        if(self::$query == '' || self::$query == null){
-            $url .= '&q=message%3A' . '*' . '';
-        }
-        else{
-            $url .= '&q=message%3A"' . self::$query . '"';
-        }
-
-        //source
-        if(self::$source != '' || self::$source != null){
-            $url .= '&fq=source%3A"' . self::$source . '"';
-        }
-
-        //sort_by
-        if(self::$sort_by == 'Popularity'){
-            $url .= "&sort=like_count+desc";
-
-        }
-        else if(self::$sort_by == 'Latest'){
-            $url .= "&sort=created_time+desc";
-        }
-
-        //category
-        if(self::$category != null){
-            $url .= '&fq=category%3A' . self::$category;
-
-        }
-
-        if($this->getPagination()->getOffset() > 0){
-            Yii::$app->end('heelo' . self::$source);
-        }
-
-        return $url;
-
-    }
 
 }

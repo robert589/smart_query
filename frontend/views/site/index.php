@@ -1,12 +1,17 @@
 <?php
     use kartik\sidenav\SideNav;
     use kartik\tabs\TabsX;
+    use kartik\helpers\Html;
+    use kartik\widgets\TypeAhead;
     /** @var $data_provider \common\components\CustomDataProvider */
     /** @var $category string */
     /** @var $source string */
     /** @var $sort_by string */
     /** @var $query string */
 
+$this->title = 'Smart Query';
+
+\yii\bootstrap\BootstrapPluginAsset::register($this);
 
 $items = [
         [
@@ -30,37 +35,43 @@ $items = [
     ];
 
     $category_items = [
-        [
-            'label' => 'All',
-        ],
-        [
-            'label' => 'Politics',
+           'All' => 'All',
+           'Politics' => 'Politics',
+           'Social' => 'Social',
+           'Technology' => 'Technology',
+           'Economy' => 'Economy',
+   ];
 
-        ],
-        [
-            'label' => 'Social',
+$sort_by_items = [
+        'Relevance' => 'Relevance',
 
-        ],
-        [
-            'label' => 'Technology',
-        ],
-        [
-            'label' => 'Economy',
+        'Popularity' => 'Popularity',
+        'Latest' => 'Latest'
 
-        ]
-
-
-    ]
+];
 ?>
+    <div id = "left-sidebar">
+        <div align="center">
+            <h5>CATEGORY</h5>
+        </div>
 
-    <div id="left-sidebar" class="col-md-3">
-        <?=
-        SideNav::widget([
-            'type' => SideNav::TYPE_DEFAULT,
-            'heading' => 'Category',
-            'items' => $category_items
-        ]);
-        ?>
+        <?= Html::radioButtonGroup('category_sidenav', 'All', $category_items, ['separator' => '<br>',]) ?>
+
+        <br>
+        <br>
+
+        <div align="center">
+            <h5>SORT BY</h5>
+        </div>
+        <?= Html::radioButtonGroup('sort_by_sidenav', 'Relevance', $sort_by_items, ['separator' => '<br>',]) ?>
+
+        <br><br>
+        <br><br>
+        <div align="center">
+            <?= Html::button('Update Data', ['class' => 'btn btn-lg btn-primary' , 'align' => 'center']) ?>
+
+        </div>
+
     </div>
     <div class="col-md-9 col-xs-9 col-md-offset-3">
         <div class='col-md-12 marginer'>
@@ -69,7 +80,6 @@ $items = [
                 'items'=>$items,
                 'position'=>TabsX::POS_ABOVE,
                 'encodeLabels'=>false,
-
             ]) ?>
         </div>
 

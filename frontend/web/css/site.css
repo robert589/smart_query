@@ -15,7 +15,12 @@ div.below_image{
     bottom: 0;
     color: white;
 }
-
+div.btn-group{
+    min-width:100%;
+}
+label.btn{
+    min-width : 100% !important;
+}
 img.news_image{
     max-width: 500px;
     max-height: 500px;

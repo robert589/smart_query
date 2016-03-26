@@ -11,6 +11,8 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use kartik\select2\Select2;
 use kartik\widgets\SideNav;
+use kartik\widgets\Typeahead;
+use yii\helpers\Url;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -43,13 +45,29 @@ $this->beginBody() ?>
     <div class="collapse navbar-collapse col-md-offset-3">
       <form class="navbar-form navbar-left mynav" role="search">
         <div class="form-group">
-          <?=  Html::textInput(
-                'search_box_menu',
-                $this->params['query'],
-                ['placeholder' => 'Search', 'class' => 'form-control','id' => 'search_box']
+          <?=
+                 Typeahead::widget([
+                    'name' => 'search_box',
+                     'id' => 'search_box',
+                    'options' => ['placeholder' => 'Search here ...'],
+                    'scrollable' => true,
+                    'pluginOptions' => ['highlight'=>true],
+                    'dataset' => [[
 
-            )
-            ?>
+                        'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                        'display' => 'value',
+                        'remote' =>
+                            [
+                                'url' => Url::to(['site/spell-list?q=%QUERY']),
+                                'wildcard' => '%QUERY'
+                            ]
+                        ,
+                        'limit' => 10,
+
+                    ]
+                    ]
+                ])
+                 ?>
         </div>
         <?= Html::button('Search' , ['class' => 'btn btn-primary', 'style' => 'margin-top:5px', 'id' => 'query_button']) ?>
       </form>
