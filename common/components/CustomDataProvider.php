@@ -84,6 +84,8 @@ class CustomDataProvider extends BaseDataProvider
 
                 $results = $results->getData();
                 $results = $results['response']['docs'];
+
+                $file = fopen(Yii::getAlias('@text'). '/output.txt', 'w+');
                 return $results;
             }
             else{

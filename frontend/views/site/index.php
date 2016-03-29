@@ -38,7 +38,7 @@ $items = [
            'Politics' => 'Politics',
            'Social' => 'Social',
            'Technology' => 'Technology',
-           'Economy' => 'Economy',
+           'Sports' => 'Sports',
    ];
 
 $sort_by_items = [
