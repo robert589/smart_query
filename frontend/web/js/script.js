@@ -26,6 +26,12 @@ $(document).ready(function(){
         query();
     });
 
+    $("#update_data").click(function(){
+        $("#crawlModal").modal("show")
+            .find('#crawlModal')
+            .load($(this).attr("value"));
+    });
+
     $("#query_button").click(function(){
         $("#query").val($("#search_box").val());
 
@@ -42,7 +48,6 @@ $(document).ready(function(){
 
     $("input:radio[name=category_sidenav]").change(function(){
         var category =  $(this).closest('label.active input:radio').val();
-
         $("#category").val(category);
         query();
     });
@@ -54,6 +59,14 @@ $(document).ready(function(){
         $("#sort_by").val(sort_by);
         query();
     });
+
+    $(document).on('pjax:send', function() {
+        $('#loading-bar').show()
+    })
+    $(document).on('pjax:complete', function() {
+        $('#loading-bar').hide()
+    })
+    $('#loading-bar').height($(document).height());
 
 
 });

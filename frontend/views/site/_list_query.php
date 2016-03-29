@@ -52,11 +52,26 @@
 
     </div>
 
-    <div class="col-md-12 marginer" style="margin-right:0; margin-bottom: 30px">
-        <img src="<?= $model['attachment_media_fullsize_src']?>" class="news_image"  id="image">
-        <div class="below_image" align="center">
-            <?= $attc_name ?>
+    <div class="col-md-12 marginer" style="margin-right:0; margin-bottom: 30px; text-align: center">
+        <div style="display: table; margin: 0 auto;">
+
+            <?php if(isset($model['attachment_media_fullsize_src'])){ ?>
+                <img src="<?= $model['attachment_media_fullsize_src']?>" class="news_image"  id="image">
+            <?php }else if(isset($model['attachment_media_src'])){ ?>
+                <img src="<?= $model['attachment_media_src']?>" class="news_image"  id="image">
+            <?php }else{?>
+
+                <img src="<?= Yii::$app->request->baseUrl . '/frontend/web/img/unavailable.jpg' ?>" class="news_image"  id="image">
+            <?php }?>
+
+            <?php if(isset($attc_name) && $attc_name != null){ ?>
+                <div class="below_image" align="center">
+                    <?= $attc_name ?>
+                </div>
+
+            <?php } ?>
         </div>
+
     </div>
 
 

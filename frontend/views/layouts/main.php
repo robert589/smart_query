@@ -85,6 +85,11 @@ $this->beginBody() ?>
         <div class="col-md-12 col-xs-12">
             <?= $content ?>
         </div>
+        <div id="loading-bar" style="display: none">
+            <div style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%;background-color:white;opacity: 0.4;'>
+                Loading
+            </div>
+        </div>
     </div>
 </div>
 

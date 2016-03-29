@@ -63,6 +63,9 @@ class CustomDataProvider extends BaseDataProvider
 
             $url = $this->url;
 
+            if(strpos($url, 'Straits Times') !== false){
+               // Yii::$app->end($url);
+            }
             $client = new Client();
 
             if (($pagination = $this->getPagination()) !== false) {

@@ -1,8 +1,7 @@
 <?php
-    use kartik\sidenav\SideNav;
     use kartik\tabs\TabsX;
     use kartik\helpers\Html;
-    use kartik\widgets\TypeAhead;
+use yii\bootstrap\Modal;
     /** @var $data_provider \common\components\CustomDataProvider */
     /** @var $category string */
     /** @var $source string */
@@ -50,6 +49,14 @@ $sort_by_items = [
 
 ];
 ?>
+<?php
+Modal::begin([
+    'id' => 'crawlModal'
+]);
+echo $this->render('crawl');
+Modal::end();
+?>
+
     <div id = "left-sidebar">
         <div align="center">
             <h5>CATEGORY</h5>
@@ -68,7 +75,7 @@ $sort_by_items = [
         <br><br>
         <br><br>
         <div align="center">
-            <?= Html::button('Update Data', ['class' => 'btn btn-lg btn-primary' , 'align' => 'center']) ?>
+            <?= Html::button('Update Data', ['class' => 'btn btn-lg btn-primary' , 'id' => 'update_data', 'align' => 'center']) ?>
 
         </div>
 
