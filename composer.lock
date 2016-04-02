@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "30249863bfe44908d69094a151365635",
-    "content-hash": "554aaf1c2c9557ac42be989f016861dc",
+    "hash": "1af446322f8db60fd2fc48bd10d79c33",
+    "content-hash": "caaf54409dca5a06bcf1c093997a2c51",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -838,12 +838,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-                "reference": "af32eeee557fa12e1b362e24fd8d0bc14713e361"
+                "reference": "3f7b38886e334a2c8c4262f155d98812461efd36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/af32eeee557fa12e1b362e24fd8d0bc14713e361",
-                "reference": "af32eeee557fa12e1b362e24fd8d0bc14713e361",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/3f7b38886e334a2c8c4262f155d98812461efd36",
+                "reference": "3f7b38886e334a2c8c4262f155d98812461efd36",
                 "shasum": ""
             },
             "require": {
@@ -884,7 +884,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-03-25 08:49:17"
+            "time": "2016-03-29 09:44:50"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -1603,21 +1603,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kop/yii2-scroll-pager.git",
-                "reference": "08b19abb2139ff18c91d5178f17891ab2fa14316"
+                "reference": "3dedbd3203e5a05123e1a024dff2dbbce4cfca19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kop/yii2-scroll-pager/zipball/08b19abb2139ff18c91d5178f17891ab2fa14316",
-                "reference": "08b19abb2139ff18c91d5178f17891ab2fa14316",
+                "url": "https://api.github.com/repos/kop/yii2-scroll-pager/zipball/3dedbd3203e5a05123e1a024dff2dbbce4cfca19",
+                "reference": "3dedbd3203e5a05123e1a024dff2dbbce4cfca19",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0",
-                "webcreate/jquery-ias": "~2.2.0",
+                "webcreate/jquery-ias": "^2.2.1",
                 "yiisoft/yii2": "*"
-            },
-            "require-dev": {
-                "codeception/codeception": "~2.0"
             },
             "type": "yii2-extension",
             "autoload": {
@@ -1646,7 +1643,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2015-10-19 12:44:33"
+            "time": "2016-03-29 02:46:33"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1747,16 +1744,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "438f2d2228b450fad76e022264b1d8e30ea12633"
+                "reference": "81c67c9859d5c78949561abe12acbe2fa427210c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/438f2d2228b450fad76e022264b1d8e30ea12633",
-<<<<<<< HEAD
-                "reference": "438f2d2228b450fad76e022264b1d8e30ea12633",
-=======
-                "reference": "1a6d5e89ba4b30e7c658fbd3c268ef0ce750ae95",
->>>>>>> 327604635fd045edd03676a7f23fbf76d8d872a0
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/81c67c9859d5c78949561abe12acbe2fa427210c",
+                "reference": "81c67c9859d5c78949561abe12acbe2fa427210c",
                 "shasum": ""
             },
             "require": {
@@ -1837,7 +1830,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-03-25 20:39:29"
+            "time": "2016-04-01 19:28:23"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1845,12 +1838,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "e64170ffa5678be6cb8c3decf92feac8142aa523"
+                "reference": "4dd9f52e2a376a875d998de6ab4c381291b0c69e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/e64170ffa5678be6cb8c3decf92feac8142aa523",
-                "reference": "e64170ffa5678be6cb8c3decf92feac8142aa523",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/4dd9f52e2a376a875d998de6ab4c381291b0c69e",
+                "reference": "4dd9f52e2a376a875d998de6ab4c381291b0c69e",
                 "shasum": ""
             },
             "require": {
@@ -1887,7 +1880,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2016-03-21 19:11:20"
+            "time": "2016-03-30 22:44:25"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -2068,12 +2061,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "68c0d749b7a9bb527a7b0d3226fa397f26005955"
+                "reference": "8deb6343c80c4edf546a6fff01a2b05c7dc59ac4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/68c0d749b7a9bb527a7b0d3226fa397f26005955",
-                "reference": "68c0d749b7a9bb527a7b0d3226fa397f26005955",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/8deb6343c80c4edf546a6fff01a2b05c7dc59ac4",
+                "reference": "8deb6343c80c4edf546a6fff01a2b05c7dc59ac4",
                 "shasum": ""
             },
             "require": {
@@ -2110,7 +2103,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-03-24 17:39:55"
+            "time": "2016-03-29 16:49:43"
         },
         {
             "name": "phpspec/php-diff",

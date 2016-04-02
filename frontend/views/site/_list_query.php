@@ -32,8 +32,12 @@
 
 <div class="col-md-12" style="margin-bottom: 50px; border-bottom: 1px solid #E5E5E5">
     <div class="col-md-12 marginer" style="margin-bottom: 15px">
-        <div class="col-md-2 marginer">
-            <img style="width:100%" src="<?= $source_logo ?>">
+        <div class="col-md-1 marginer">
+            <?php if($model['source'] == 'Guardian'){ ?>
+                <img style="width:70%;max-height: 50px" src="<?= $source_logo ?>">
+            <?php }else{ ?>
+                <img style="width:100%;" src="<?= $source_logo ?>">
+            <?php }?>
         </div>
         <div class="col-md-6">
             <?= Html::a($model['source'], $model['attachment_media_href']) ?> | <?= $model['category'] ?>
@@ -61,7 +65,7 @@
                 <img src="<?= $model['attachment_media_src']?>" class="news_image"  id="image">
             <?php }else{?>
 
-                <img src="<?= Yii::$app->request->baseUrl . '/frontend/web/img/unavailable.jpg' ?>" class="news_image"  id="image">
+                <img src="<?= Yii::$app->request->baseUrl . '/frontend/web/img/unavailable.jpg' ?>" class="news_image"   id="image">
             <?php }?>
 
             <?php if(isset($attc_name) && $attc_name != null){ ?>
