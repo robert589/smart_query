@@ -11,6 +11,7 @@ use yii\widgets\ListView;
 /** @var $source string */
 /** @var $sort_by string */
 /** @var $query string */
+/** @var $suggestion string */
 
 ?>
 
@@ -38,23 +39,15 @@ use yii\widgets\ListView;
 
     <?= Html::hiddenInput('source', $source, ['id' =>  'source'] ) ?>
 
+
 <div id="news-div">
 
     <?= ListView::widget([
         'id' => 'news_list',
-        'summary' => false,
         'dataProvider' => $data_provider,
         'itemOptions' => ['class' => 'item'],
-        'layout' => "{summary}\n{items}\n{pager}",
-        'pager' => [
-            'class' => ScrollPager::class,
-            'enabledExtensions' => [
-                ScrollPager::EXTENSION_TRIGGER,
-                ScrollPager::EXTENSION_NONE_LEFT,
-                ScrollPager::EXTENSION_PAGING,
-            ],
-            'triggerOffset' => 200
-        ],
+        'layout' => "{summary}<br>\n{items}\n<div align='center'>{pager}</div>",
+
         'itemView' => function ($model, $key, $index, $widget) {
             return $this->render('_list_query',['model' => $model]);
         }
@@ -64,6 +57,9 @@ use yii\widgets\ListView;
 
 <?php ActiveForm::end() ?>
 
+<?php if($suggestion != ''){ ?>
+    <?= 'Did you mean ' ?> <?= Html::button($suggestion, ['class' => 'btn btn-default', 'id' => 'suggestion_btn'] ) ?> ?
+<?php } ?>
 
 <?php Pjax::end()
 ?>

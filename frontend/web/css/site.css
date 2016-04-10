@@ -96,7 +96,7 @@ div#news-div{
         margin-left: 0%;
     }
     div#left-sidebar {
-        display: none;
+        display: none !important;
     }
     div#news-div{
         margin-top: 120px;
@@ -108,12 +108,15 @@ div#news-div{
 }
 .mynavbar{
     background-color: white;
+    margin-bottom: 0px;
+    height:60px;
 }
 
 .mynav{
     padding-right:10px;
     margin-top:5px;
-    width: 450px;
+    margin-left:20px !important;
+    width: 800px;
 }
 
 .item{
@@ -145,6 +148,14 @@ div#news-div{
 .jumbotron .btn {
     font-size: 21px;
     padding: 14px 24px;
+}
+
+.container{
+    margin-left:96px;
+}
+
+#search_box{
+    width: 100%;
 }
 
 .not-set {

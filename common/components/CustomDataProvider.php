@@ -25,6 +25,7 @@ class CustomDataProvider extends BaseDataProvider
     public $totalCount;
 
 
+
     /**
      * @inheritdoc
      */
@@ -62,6 +63,7 @@ class CustomDataProvider extends BaseDataProvider
 
 
             $url = $this->url;
+            $start = microtime(true);
 
             if(strpos($url, 'Straits Times') !== false){
                // Yii::$app->end($url);
@@ -73,18 +75,19 @@ class CustomDataProvider extends BaseDataProvider
                 $url .= '&start=' .$pagination->getOffset() . '&rows=' . $pagination->getLimit();
             }
 
-
             $results = $client->createRequest()
                 ->setMethod('post')
                 ->setUrl($url)
                 ->send();
 
+            $this->timeTaken = number_format(microtime(true) - $start, 2, '.',',');
+
 
             if($results->isOk){
 
                 $results = $results->getData();
-                $results = $results['response']['docs'];
 
+                $results = $results['response']['docs'];
                 $file = fopen(Yii::getAlias('@text'). '/output.txt', 'w+');
                 return $results;
             }

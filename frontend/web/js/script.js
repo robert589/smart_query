@@ -59,18 +59,37 @@ $(document).ready(function(){
         $("#sort_by").val(sort_by);
         query();
     });
-
+    var first = true;
     $(document).on('pjax:send', function() {
-        $('#loading-bar').show()
+        $('#loading-bar').show();
+
     })
     $(document).on('pjax:complete', function() {
-        $('#loading-bar').hide()
+        $('#loading-bar').hide();
+
     })
     $('#loading-bar').height($(document).height());
+    $("#query_button").click(function() {
+        if (first) {
+            first = !first;
+            $("input[value='Relevance']").click();
+        }
+    });
+    $("#search_box").keydown(function (e) {
+        //console.log(e);
+       if (e.keyCode == 13) {
+           e.preventDefault();
+           $("#query_button").click();
+       }
+    });
 
+    $(document).on('click', '#suggestion_btn',function(){
+        $("#query").val($("#suggestion_btn").text());
 
+        query();
+    });
+    function query(){
+        $("#form_up").submit();
+    }
 });
 
-function query(){
-    $("#form_up").submit();
-}

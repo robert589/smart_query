@@ -35,16 +35,17 @@ $this->beginBody() ?>
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Smart Query',
+        'brandLabel' => '<image src="'. Yii::$app->request->baseUrl . '/frontend/web/img/download.jpe' .'" style="max-height:60px;margin-top:-18px;max-width:500px;">',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top mynavbar',
+
         ],
     ]) ?>
 
-    <div class="collapse navbar-collapse col-md-offset-3">
+    <div class="collapse navbar-collapse">
       <form class="navbar-form navbar-left mynav" role="search">
-        <div class="form-group">
+        <div class="form-group" style="width:600px;margin-top:7px;margin-left:40px;">
           <?=
                  Typeahead::widget([
                     'name' => 'search_box',
@@ -53,7 +54,6 @@ $this->beginBody() ?>
                     'scrollable' => true,
                     'pluginOptions' => ['highlight'=>true],
                     'dataset' => [[
-
                         'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                         'display' => 'value',
                         'remote' =>
@@ -63,13 +63,15 @@ $this->beginBody() ?>
                             ]
                         ,
                         'limit' => 10,
-
                     ]
                     ]
                 ])
-                 ?>
+        ?>
         </div>
-        <?= Html::button('Search' , ['class' => 'btn btn-primary', 'style' => 'margin-top:5px', 'id' => 'query_button']) ?>
+          <div class="form-group"
+               style="margin-top:7px">
+        <?= Html::button('Search' , ['class' => 'btn btn-primary','id' => 'query_button']) ?>
+          </div>
       </form>
     </div>
 <?php
@@ -93,13 +95,6 @@ $this->beginBody() ?>
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 <?php
 $this->registerJsFile(Yii::$app->request->baseUrl . '/frontend/web/js/jquery.js');
 $this->registerJsFile(Yii::$app->request->baseUrl . '/frontend/web/js/script.js') ?>

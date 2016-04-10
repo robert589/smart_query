@@ -99,14 +99,22 @@ class SiteController extends Controller
         }
 
 
-        if (isset($_POST['sort_by'])) {
-            $sort_by = $_POST['sort_by'];
-        } else if (isset($_GET['sort_by'])) {
-            $sort_by = $_GET['sort_by'];
+        if (isset($_REQUEST['sort_by'])) {
+            $sort_by = $_REQUEST['sort_by'];
         }else {
             $sort_by = '';
         }
+        if(!Yii::$app->request->isPjax){
+            if($query == null && !isset($_REQUEST['sort_by'])){
 
+                $sort_by = 'Latest';
+            }
+        }
+        else{
+            if($query != null && !isset($_REQUEST['sort_by'])){
+                $sort_by = '';
+            }
+        }
         $url = $this->getUrl($query, $source, $sort_by, $category);
         $data_provider = new CustomDataProvider([
                 'url' => $url,
@@ -123,11 +131,43 @@ class SiteController extends Controller
             ]
         );
 
+
+
+        if($query != ''){
+            $sort_by  = 'Relevance';
+            $suggestion = $this->suggestion($query);
+        }
+        else{
+            $suggestion = '';
+        }
+
         return $this->render('index', ['data_provider' => $data_provider,
             'source' => $source,
             'category' => $category,
             'query' => $query,
+            'suggestion' => $suggestion,
             'sort_by' => $sort_by]);
+    }
+
+    public function suggestion($q){
+        $url = "http://solr.kenrick95.xyz/solr/cz4034/spell?q=message%3A%22$q%22&rows=0&wt=json&indent=true";
+
+        $client = new Client();
+
+        $results = $client->createRequest()
+            ->setMethod('post')
+            ->setUrl($url)
+            ->send();
+
+        if($results->isOk){
+            $results = $results->getData();
+            if($results['spellcheck']['correctlySpelled'] == false){
+                $result =  $results['spellcheck']['suggestions'][1]['suggestion'][0]['word'];
+                return $result;
+            }
+        }
+
+
     }
 
     public function actionSpellList($q = null){
@@ -138,7 +178,7 @@ class SiteController extends Controller
 
         $q = str_replace(' ', '%20', $q);
 
-       $url = "http://solr.kenrick95.xyz/solr/cz4034/spell?q=message%3A'$q'&rows=0&wt=json&indent=true";
+       $url = "http://solr.kenrick95.xyz/solr/cz4034/spell?q=message%3A%22$q%22&rows=0&wt=json&indent=true";
 
        $client = new Client();
 
@@ -150,8 +190,8 @@ class SiteController extends Controller
         if($results->isOk){
             $results = $results->getData();
             if($results['spellcheck']['correctlySpelled'] == false){
-                $results = $results['spellcheck']['suggestions'][1]['suggestion'];
 
+                $results = $results['spellcheck']['suggestions'][1]['suggestion'];
                 foreach($results as $result){
                     $out[] = ['value' => $result['word'] ];
                 }
@@ -200,37 +240,13 @@ class SiteController extends Controller
             $json_output = json_decode($json, false);
 
             $max = SIZEOF($json_output);
-           // Yii::$app->end(var_dump($json_output));
-//            Yii::$app->end(var_dump($json_output));
             $dunno = get_object_vars($json_output[0]);
             $timestamp = $dunno['created_time'];
 
-            if ($timestamp != "") {
-               // $time = fopen($filename, 'w');
-                //fwrite($time, $timestamp);
-                //fclose($time);
-            }
 
             $revised = json_encode($json_output);
-  /*              $name = Yii::getAlias('@text'). '/' . $news.".json";
-                $file = fopen($name,'r');
-                $text = fread($file,filesize($name));
-                $file = fopen($name,"w");
-                if (strlen($text)>1)
-                {
-                $revised = substr($revised,0,strlen($revised)-2);
-                }
-                if (strlen($revised)>1)
-                {
-                $text=substr($text,1);
-                }
-                $finalwrite = $revised.",".$text;
-                echo fwrite($file,$finalwrite);
-*/
-           // $url = 'http://10.27.43.226:8080/web/classify';
-           $url = 'http://solr.kenrick95.xyz:82/classify';
+           $url = 'http://10.27.29.94:8080/web/classify';
             $data = array('text' => $revised, 'filename' => $news);
-// use key 'http' even if you send the request to https://...
 
             $file = fopen(Yii::getAlias('@text'). '/output.txt', 'w');
             fwrite($file, $json);
@@ -243,7 +259,6 @@ class SiteController extends Controller
                 )
             );
             $context = stream_context_create($options);
-            //set_time_limit(0);
             $result = file_get_contents($url, false, $context);
             if ($result === FALSE) { /* Handle error */
             }
@@ -288,13 +303,32 @@ class SiteController extends Controller
             $url .= '&q=message%3A' . '*' . '';
         }
         else{
-            if($queries = explode(' ', $query)){
-                foreach($queries as $item){
-                    $url .= '&q=message%3A"' . $item . '"';
+            if(strpos($query, '"') === false){
 
+                $queries = explode(' ', $query);
+
+                //case more than one space
+                $url .= '&q=';
+                $first = 1;
+                foreach($queries as $item){
+                    if($first == 1){
+                        $url .= 'message%3A' . urlencode($item) . '';
+                        $first = 0;
+                    }
+                    else{
+                        $url .= '%20OR%20message%3A' . urlencode($item) . '';
+
+                    }
+                    $url .= '%20OR%20attachment_name%3A' . urlencode($item) . '';
                 }
             }
+            else{
+                $url .= '&q=';
+                $url .= 'message%3A' . urlencode($query) . '';
+                $url .= '%20OR%20attachment_name%3A' . urlencode($query) . '';
+            }
         }
+
         //source
         if($source != '' || $source != null  ){
             if($source == 'Straits Times'){
@@ -313,6 +347,8 @@ class SiteController extends Controller
         }
         else if($sort_by == 'Latest'){
             $url .= "&sort=created_time+desc";
+        } else if ($sort_by == 'Relevance' && $query == '') {
+            $url .= "&sort=created_time+desc";
         }
 
         //category
@@ -323,6 +359,7 @@ class SiteController extends Controller
             }
 
         }
+
         return $url;
 
     }
